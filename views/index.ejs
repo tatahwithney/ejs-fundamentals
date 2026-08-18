@@ -1,0 +1,11 @@
+<%- include("partials/header") %>
+
+<h1>Welcome to EJS</h1>
+
+<% if (message) { %>
+    <p><%= message %></p>
+<% } %>
+
+<p>This page uses reusable EJS partials.</p>
+
+<%- include("partials/footer") %>
