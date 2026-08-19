@@ -1,21 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <h1>Welcome to the EJS Application</h1>
+<%- include("partials/header") %>
 
-    <p>Welcome to our Express and EJS application.</p>
-
+<main>
+    <h1>Welcome to EJS Fundamentals</h1>
+    <p>This page was rendered using EJS.</p>
     <p>Current server time: <%= currentTime %></p>
+    <p>I am Pseudonymous</p>
+</main>
 
-    <nav>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/users">Users</a>
-    </nav>
-</body>
-</html>
+<%- include("partials/footer") %>

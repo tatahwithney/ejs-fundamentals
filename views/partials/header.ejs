@@ -4,11 +4,129 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EJS Fundamentals</title>
+
+    <style>
+        *
+        {
+            color: white;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            
+        }
+        body
+        {
+            background-color: black;
+        }
+        nav {
+            margin-bottom: 20px;
+            display: flex;
+            width: 100%;
+            border-bottom: 2px solid chartreuse;
+            align-items: center;
+            justify-content: space-around;
+        }
+
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            will-change: transform;
+            transition: ease-in 0.3s;
+            transform: scale(1);
+        }
+        nav a:hover
+        {
+            transform: scale(1.07);
+            padding-bottom: 3px;
+            
+        } 
+        nav a.active {
+            font-weight: bold;
+            text-decoration: underline;
+            color: chartreuse;
+        }
+        li
+        {
+            list-style-type: none;
+            border: 1px solid white;
+            border-radius: 5px;
+            height: calc(auto);
+            width: 100%;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+        }
+        li strong
+        {
+            display: flex;
+            flex-direction: row;
+            font-size: 120%;
+        }
+        li:hover .user_name
+        {
+            color: chartreuse;
+        }
+        .user_age
+        {
+            border: 1px solid white;
+            border-radius: 50%;
+            padding: 3px;
+            display: flex;
+            justify-self: end;
+        }
+        li:hover
+        {
+            border-color: chartreuse;
+        }
+        li:hover .user_age
+        {
+            border-color: chartreuse;
+        }
+        li *
+        {
+            transition: ease-in-out all 1.5s;
+        }
+        footer
+        {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;          /* Set a specific height */
+            background-color: black; 
+            z-index: 1000;         /* Forces it to sit on top of scrolling elements */
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Optional: adds separation */
+            justify-content: end;
+            align-items: center;
+        }
+        footer>p
+        {
+            color: chartreuse;
+        }
+
+    </style>
 </head>
 <body>
 
-<nav>
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/form">Form</a>
-</nav>
+<header>
+    <nav>
+        <a href="/" class="<%= activePage === 'home' ? 'active' : '' %>">
+            Home
+        </a>
+
+        <a href="/about" class="<%= activePage === 'about' ? 'active' : '' %>">
+            About
+        </a>
+
+        <a href="/users" class="<%= activePage === 'users' ? 'active' : '' %>">
+            Users
+        </a>
+        <a href="/form" class="<%= activePage === 'form' ? 'active' : '' %>">
+            Form
+        </a>
+         <a href="/index" class="<%= activePage === 'index' ? 'active' : '' %>">
+            Index
+        </a>
+    </nav>
+</header>
