@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EJS Fundamentals</title>
+    <title><%= activePage %> | EJS Fundamentals</title>
 
     <style>
         *
@@ -11,9 +11,13 @@
             color: white;
             font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
             box-sizing: border-box;
-            padding: 0;
+            padding: 0 4px;
             margin: 0;
             
+        }
+        h1
+        {
+            color: chartreuse;
         }
         body
         {
@@ -22,24 +26,24 @@
         nav {
             margin-bottom: 20px;
             display: flex;
-            width: 100%;
+            width: 50%;
             border-bottom: 2px solid chartreuse;
             align-items: center;
             justify-content: space-around;
+            justify-self: end;
+            height: 60px;
         }
 
         nav a {
             margin-right: 15px;
             text-decoration: none;
             will-change: transform;
-            transition: ease-in 0.3s;
+            transition: ease-in-out all 0.3s;
             transform: scale(1);
         }
         nav a:hover
         {
             transform: scale(1.07);
-            padding-bottom: 3px;
-            
         } 
         nav a.active {
             font-weight: bold;
@@ -104,6 +108,87 @@
         {
             color: chartreuse;
         }
+        .contact_us, .student_form
+        {
+            display: flex;
+            flex-direction: column;
+            width: 25%;
+            height: auto;
+            align-items: center;
+            justify-content: center;
+            top: 50%;
+            left: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+        .contact_us form, .student_form form
+        {
+            border: 1px solid chartreuse;
+            border-radius: 7px;
+        }
+        .contact_us div, .student_form div
+        {
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .contact_us label, .student_form label
+        {
+            display: flex;
+            flex-direction: row;
+            align-self: start;
+            width: 95%;
+            margin-left: calc(5%/2);
+        }
+        .contact_us input, .contact_us textarea, .student_form input
+        {
+            width: 95%;
+            background-color: transparent;
+            border: 1px solid chartreuse;
+            border-radius: 5px;
+            display: flex;
+            align-self: center;
+            resize: none;
+            margin: 10px 0;
+        }
+
+        .contact_us button, .student_form button
+        {
+            width: auto;
+            background-color: chartreuse;
+            color: black;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            align-self: center;
+            justify-self: center;
+            border: 1px solid chartreuse;
+            border-radius: 6px;
+            padding: 2px 4px;
+            transition: ease-in-out all 0.3s;
+            will-change: transform;
+            transform: scale(1);
+        }
+        button:hover
+        {
+            transform: scale(1.02);
+            cursor: pointer;
+        }
+        input:active
+        {
+            background-color: black;
+            color: white;
+        }
+        error
+        {
+            color: red;
+            margin: 5px 0;
+        }
 
     </style>
 </head>
@@ -127,6 +212,9 @@
         </a>
          <a href="/index" class="<%= activePage === 'index' ? 'active' : '' %>">
             Index
+        </a>
+        <a href="/contact" class="<%= activePage === 'contact' ? 'active' : '' %>">
+            Contact
         </a>
     </nav>
 </header>

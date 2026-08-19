@@ -6,6 +6,9 @@ const app = express();
 //Get environment port or use PORT 3000
 const PORT = process.env.PORT || 3000;
 
+//url routes so express understands form data
+app.use(express.urlencoded({ extended: true }));
+
 //set view engine to ejs
 app.set("view engine", "ejs");
 
@@ -37,6 +40,16 @@ app.get("/index", (req, res) =>{
         activePage: "index"
     });
 })
+
+//render the contact page
+app.get("/contact", (req, res) => {
+    res.render("contact", {
+        activePage: "contact",
+        error: null
+    });
+});
+
+//max and min age are the age bounds for users listed at users
 const maxAge = 25;
 const minAge = 18;
 //Display key:value pairs for users in the object users
@@ -62,6 +75,33 @@ app.get("/users", (req, res) => {
     res.render("users", {
         users: users,
         activePage: "users"
+    });
+});
+
+app.post("/contact", (req, res) => {
+    const { name, email, message } = req.body;
+
+    if (!name || !email || !message) {
+        return res.status(400).render("contact", {
+            activePage: "contact",
+            error: "<error>All fields are required.</error>"
+        });
+    }
+
+    console.log("Contact submission:");
+    console.log({
+        name,
+        email,
+        message
+    });
+
+    res.redirect("/success");
+});
+
+//render the success message once form data is valid
+app.get("/success", (req, res) => {
+    res.render("success", {
+        activePage: null
     });
 });
 

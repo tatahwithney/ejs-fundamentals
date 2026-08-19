@@ -1,19 +1,21 @@
 <%- include("partials/header") %>
 
-<h1>Student Form</h1>
+<main class="student_form">
+    <h1>Student Form</h1>
 
 <form action="/submit" method="POST">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
 
-    <br><br>
-
-    <label for="course">Course:</label>
-    <input type="text" id="course" name="course" required>
-
-    <br><br>
+   <div>
+        <label for="course">Course:</label>
+        <input type="text" id="course" name="course" required>
+   </div>
 
     <button type="submit">Submit</button>
 </form>
+</main>
 
 <%- include("partials/footer") %>
