@@ -111,3 +111,122 @@ app.listen(PORT, () => {
 });
 
 message = "Hey do you see me?"
+
+//student object to be called by get /students
+const students = [
+    {
+        id: 1,
+        name: "Tatah Withney",
+        email: "tatah@example.com",
+        course: "Backend Development"
+    },
+    {
+        id: 2,
+        name: "John Doe",
+        email: "john@example.com",
+        course: "Software Engineering"
+    },
+    {
+        id: 3,
+        name: "Jane Doe",
+        email: "jane@example.com",
+        course: "Web Development"
+    }
+];
+
+//route to create new student
+app.get("/students/new", (req, res) => {
+    res.render("student-form", {
+        activePage: "students"
+    });
+});
+
+// route for students
+app.get("/students", (req, res) => {
+    res.render("students", {
+        students,
+        activePage: "students"
+    });
+});
+
+
+
+//route for specific student
+app.get("/students/:id", (req, res) => {
+    const id = Number(req.params.id);
+
+    const student = students.find(student => student.id === id);
+
+    if (!student) {
+        return res.status(404).send("Student not found");
+    }
+
+    res.render("student-detail", {
+        student,
+        activePage: "students"
+    });
+});
+
+app.post("/students/new", (req, res) => {
+    const { name, email, course } = req.body;
+
+    const newStudent = {
+        id: students.length > 0
+            ? students[students.length - 1].id + 1
+            : 1,
+        name,
+        email,
+        course
+    };
+
+    students.push(newStudent);
+
+    res.redirect("/students");
+});
+
+/*
+app.get("/students", (req, res) => {
+    res.render("students", {
+        students,
+        activePage: "students"
+    });
+});
+
+app.get("/students/new", (req, res) => {
+    res.render("student-form", {
+        activePage: "students"
+    });
+});
+
+app.get("/students/:id", (req, res) => {
+    const id = Number(req.params.id);
+
+    const student = students.find(student => student.id === id);
+
+    if (!student) {
+        return res.status(404).send("Student not found");
+    }
+
+    res.render("student-detail", {
+        student,
+        activePage: "students"
+    });
+});
+
+app.post("/students/new", (req, res) => {
+    const { name, email, course } = req.body;
+
+    const newStudent = {
+        id: students.length > 0
+            ? students[students.length - 1].id + 1
+            : 1,
+        name,
+        email,
+        course
+    };
+
+    students.push(newStudent);
+
+    res.redirect("/students");
+});
+*/
