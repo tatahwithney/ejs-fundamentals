@@ -1,19 +1,19 @@
 <%- include("partials/header") %>
 
-<main>
-    <h1>Students</h1>
+<h1>Students</h1>
 
-    <a href="/students/new">Add New Student</a>
+<a href="/students/new">Add New Student</a>
 
-    <ul>
-        <% students.forEach(student => { %>
-            <li>
-                <a href="/students/<%= student.id %>">
-                    <%= student.name %>
-                </a>
-            </li>
-        <% }) %>
-    </ul>
-</main>
+<ul>
+  <% students.forEach((student) => { %>
+    <li>
+      <a href="/students/<%= student._id %>">
+        <%= student.name %>
+      </a>
+      - <%= student.email %>
+      - <%= student.course %>
+    </li>
+  <% }) %>
+</ul>
 
 <%- include("partials/footer") %>
