@@ -20,6 +20,22 @@ app.set("view engine", "ejs");
 app.use("/", pageRoutes);
 app.use("/students", studentRoutes);
 
+// 404 middleware
+app.use((req, res) => {
+    res.status(404).render("404", {
+        activePage: null
+    });
+});
+
+// Central error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err);
+
+    res.status(500).render("error", {
+        message: err.message || "Internal Server Error"
+    });
+});
+
 // MongoDB connection
 mongoose
     .connect(MONGO_URI)

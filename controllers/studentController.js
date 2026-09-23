@@ -10,7 +10,7 @@ exports.showCreateForm = (req, res) => {
 };
 
 // Get all students
-exports.getAllStudents = async (req, res) => {
+exports.getAllStudents = async (req, res, next) => {
     try {
         const students = await Student.find();
 
@@ -19,13 +19,12 @@ exports.getAllStudents = async (req, res) => {
             activePage: "students"
         });
     } catch (error) {
-        console.error("Failed to fetch students:", error.message);
-        res.status(500).send("Failed to fetch students");
+        next(error);
     }
 };
 
 // Get one student
-exports.getStudent = async (req, res) => {
+exports.getStudent = async (req, res, next) => {
     try {
         const student = await Student.findById(req.params.id);
 
@@ -42,16 +41,12 @@ exports.getStudent = async (req, res) => {
             formData: {}
         });
     } catch (error) {
-        console.error("Failed to fetch student:", error.message);
-
-        res.status(404).render("404", {
-            activePage: "students"
-        });
+        next(error);
     }
 };
 
 // Create student
-exports.createStudent = async (req, res) => {
+exports.createStudent = async (req, res, next) => {
     try {
         const { name, email, course } = req.body;
 
@@ -63,8 +58,6 @@ exports.createStudent = async (req, res) => {
 
         res.redirect("/students");
     } catch (error) {
-        console.error("Failed to create student:", error.message);
-
         if (error.name === "ValidationError") {
             const errors = {};
 
@@ -79,12 +72,12 @@ exports.createStudent = async (req, res) => {
             });
         }
 
-        res.status(500).send("Failed to create student");
+        next(error);
     }
 };
 
 // Update student
-exports.updateStudent = async (req, res) => {
+exports.updateStudent = async (req, res, next) => {
     try {
         const { name, email, course } = req.body;
 
@@ -109,8 +102,6 @@ exports.updateStudent = async (req, res) => {
 
         res.redirect("/students");
     } catch (error) {
-        console.error("Failed to update student:", error.message);
-
         if (error.name === "ValidationError") {
             const student = await Student.findById(req.params.id);
 
@@ -134,12 +125,12 @@ exports.updateStudent = async (req, res) => {
             });
         }
 
-        res.status(500).send("Failed to update student");
+        next(error);
     }
 };
 
 // Delete student
-exports.deleteStudent = async (req, res) => {
+exports.deleteStudent = async (req, res, next) => {
     try {
         const student = await Student.findByIdAndDelete(req.params.id);
 
@@ -151,7 +142,6 @@ exports.deleteStudent = async (req, res) => {
 
         res.redirect("/students");
     } catch (error) {
-        console.error("Failed to delete student:", error.message);
-        res.status(500).send("Failed to delete student");
+        next(error);
     }
 };
