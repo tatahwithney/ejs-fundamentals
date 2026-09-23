@@ -9,15 +9,20 @@
 <h2>Edit Student</h2>
 
 <form action="/students/<%= student._id %>/edit" method="POST">
+
   <div>
     <label for="name">Name:</label>
     <input
       type="text"
       id="name"
       name="name"
-      value="<%= student.name %>"
+      value="<%= formData?.name ?? student.name %>"
       required
     >
+
+    <% if (errors?.name) { %>
+      <p><%= errors.name %></p>
+    <% } %>
   </div>
 
   <div>
@@ -26,9 +31,13 @@
       type="email"
       id="email"
       name="email"
-      value="<%= student.email %>"
+      value="<%= formData?.email ?? student.email %>"
       required
     >
+
+    <% if (errors?.email) { %>
+      <p><%= errors.email %></p>
+    <% } %>
   </div>
 
   <div>
@@ -37,9 +46,13 @@
       type="text"
       id="course"
       name="course"
-      value="<%= student.course %>"
+      value="<%= formData?.course ?? student.course %>"
       required
     >
+
+    <% if (errors?.course) { %>
+      <p><%= errors.course %></p>
+    <% } %>
   </div>
 
   <button type="submit">Update Student</button>
